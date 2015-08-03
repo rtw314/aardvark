@@ -1,0 +1,1 @@
+This is a test file to ensure Git is properly set up on my mac.
