@@ -52,7 +52,7 @@
 			"from" : "",
 			"is_present" : true,
 			"replyto" : "",
-			"to" : "dclawson@infowest.com"
+			"to" : "waiteforme15@gmail.com"
 		}
 	},
 	"general_settings" : 

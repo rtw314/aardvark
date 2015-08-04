@@ -152,6 +152,9 @@ function telephoneInput (e) {
     };
     return true;
   };
+  if (e.keyCode == 9 && telText.length == 12) { //tab key
+    return true;
+  };
   switch (telText.length) {
     case 3:
     case 7:
