@@ -1,4 +1,5 @@
 <?php
+$error="";
 function writeHeaderData() { ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,6 @@ function generateRandomString($length = 10) {
 	}
 	return $randomString;
 }
-
 $db = new SQLite3('../cox-trucking-application-form/storage/db/cox-trucking-application-form.dat');
 //Delete old Sessions
 //TODO
@@ -71,6 +71,7 @@ if (!$cookieMatch->fetchArray(SQLITE3_ASSOC)) {
 if (isset($_GET['last'])) {
 	//Include class to create PDF documents
 	require ('./lib/fpdf.php');
+	require ('array.php');
 	$last = $_GET['last'];
 	$date = $_GET['date'];
 	$time = $_GET['time'];
@@ -101,7 +102,10 @@ if (isset($_GET['last'])) {
 	//Add form data to the PDF
 	foreach ($downloadRow as $key => $value) {
 		if ($key == "data_uri") {} elseif($value != "" && !(is_null($value))) {
-			$pdf->MultiCell(0, 0.25, $key . ": " . $value, 0, "L");
+			$pdf->SetFont('Times','B',12);
+			$pdf->MultiCell(0, 0.25, $elementArray[$key] . ":", 0, "L");
+			$pdf->SetFont('Times','',12);
+			$pdf->MultiCell(0, 0.25, $value, 0, "L");
 		}
 	}
 	$pdf->Ln();
