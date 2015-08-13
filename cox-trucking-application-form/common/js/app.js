@@ -13,6 +13,7 @@
 
 ***********************************************************/
 
+jQuery(document).ready(function($) {
 /**********************************************************
 Several lines of code that remove the "display:none;" from
 the style of the element of id "fb-sigpad_control"
@@ -24,8 +25,13 @@ var sigpadControl = document.getElementById('fb-sigpad_control');
 var sigpadControlStyle = sigpadControl.getAttribute("style");
 
 //get start and end points for the display:none; portion of the style in the div
-var hideLocationStart = sigpadControlStyle.indexOf("display:none;");
-var hideLocationEnd = hideLocationStart + 13;
+if (sigpadControlStyle.indexOf("display:none;") >= 0) {
+	var hideLocationStart = sigpadControlStyle.indexOf("display:none;");
+	var hideLocationEnd = hideLocationStart + 13;
+} else {
+	var hideLocationStart = sigpadControlStyle.indexOf("display: none;");
+	var hideLocationEnd = hideLocationStart + 13;
+}
 
 //set the style to be the same, but without the display:none;
 sigpadControlStyle = (hideLocationStart == 0 ? "" : sigpadControlStyle.slice(0, hideLocationStart)) + sigpadControlStyle.slice(hideLocationEnd, sigpadControlStyle.length);
@@ -198,3 +204,4 @@ submitButton.addEventListener("mouseover", submit_form);
 document.body.addEventListener("mouseover", check_signature);
 jQuery("[type='tel']").keydown(telephoneInput);
 jQuery("[name='soc-sec-no']").keydown(socialInput);
+});
